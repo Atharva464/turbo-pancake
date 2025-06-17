@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Flat Cost Calculation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="flat-list-container">
+      <div id="userFilters" class="filters-section">
+        <div class="filter-group">
+          <label>Wing:
+            <select id="filterWing">
+              <option value="">All</option>
+            </select>
+          </label>
+          <label>Band:
+            <select id="filterBand">
+              <option value="">All</option>
+            </select>
+          </label>
+          <label>Floor:
+            <select id="filterFloor">
+              <option value="">All</option>
+            </select>
+          </label>
+          <label>Configuration:
+            <select id="filterConfig">
+              <option value="">All</option>
+            </select>
+          </label>
+          <label>Status:
+            <select id="filterStatus">
+              <option value="">All</option>
+            </select>
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button id="btnApplyFilters">Apply</button>
+          <button id="btnClearFilters">Clear</button>
+          <button id="btnDeselectFlat">Deselect Flat</button>
+          <button id="btnRefreshPage" style="margin-left: 10px;">Refresh</button>
+        </div>
+      </div>
+      <div class="flat-list" id="flatList"></div>
+    </div>
+
+    <div class="output" id="calcSection" style="display: none">
+      <div class="input-row" style="justify-content: flex-end; margin-top: 10px;">
+        <div id="selectedFlatInfo" style="font-weight: bold; font-size: 14px; color: #333; text-align: right;"></div>
+      </div>
+      <div class="input-row">
+        <label>Parking Charges:
+          <input type="checkbox" id="toggleParking" />
+        </label>
+      </div>
+      <div class="input-row">
+        <label>Discount %:
+          <input type="number" id="discountPercent" min="0" max="100" />
+        </label>
+        <label>Discount ₹:
+          <input type="number" id="discountValue" min="0" />
+        </label>
+        <label>Discount Rate:<input type="number" id="discountRate" /></label>
+        <label>Add Parking to Discount:
+          <input type="checkbox" id="addParkingToDiscount" />
+        </label>
+      </div>
+
+      <div class="input-row">
+        <label>Waiver %:<input type="number" id="mgmtWaiverPercent" min="0" max="100" /></label>
+        <label>Waiver ₹:<input type="number" id="mgmtWaiverValue" min="0" /></label>
+        <label>Waiver Rate:<input type="number" id="mgmtWaiverRate" /></label>
+      </div>
+
+      <div class="input-row">
+        <button id="btnClearCalc">Clear Inputs</button>
+        <button id="btnMarkSold">Mark as Sold</button>
+        <button id="btnMarkHold">Mark as Hold</button>
+      </div>
+      <div id="errorBox" class="error" style="margin-top: 20px;"></div>
+
+      <h3>Calculation Summary</h3>
+      <table>
+        <tbody id="resultsTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+  <script>document.getElementById('btnRefreshPage').onclick = () => location.reload();</script>
+</body>
+
+</html>

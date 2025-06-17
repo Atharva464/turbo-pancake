@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <h2>Admin Panel</h2>
+  <div class="tab-buttons">
+    <button class="active" onclick="switchTab('manageFlats')">Manage Flats</button>
+    <button onclick="switchTab('saleRequests')">Pending Requests</button>
+  </div>
+
+  <div id="manageFlats" class="tab-content active">
+    <div id="adminFilters">
+      <div class="filter-row">
+        <label>Wing: <select id="filterWing">
+            <option value="">All</option>
+          </select></label>
+        <label>Band: <select id="filterBand">
+            <option value="">All</option>
+          </select></label>
+        <label>Floor: <select id="filterFloor">
+            <option value="">All</option>
+          </select></label>
+        <label>Configuration: <select id="filterConfig">
+            <option value="">All</option>
+          </select></label>
+        <label>Status: <select id="filterStatus">
+            <option value="">All</option>
+          </select></label>
+        <button onclick="applyFilters()">Apply</button>
+        <button onclick="clearFilters()">Clear</button>
+      </div>
+
+      <div class="band-row">
+        <label>New Band Name: <input type="text" id="newBandName" placeholder="Band Name" /></label>
+        <label>Rate: <input type="number" id="newBandRate" placeholder="Rate" /></label>
+        <button onclick="createBand()">Create Band</button>
+
+        <label>Update Band:
+          <select id="bulkBandSelect">
+            <option value="">Select Band</option>
+          </select>
+        </label>
+        <label>New Rate:
+          <input type="number" id="bulkBandRate" placeholder="Enter rate" />
+        </label>
+        <button onclick="updateBandRate()">Update</button>
+        <button onclick="location.reload()">Refresh</button>
+      </div>
+    </div>
+
+    <div style="padding: 20px;">
+      <div id="messageBox" style="margin: 10px; font-weight: bold;"></div>
+
+      <table id="adminTable" border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Flat No</th>
+            <th>Configuration</th>
+            <th>Wing</th>
+            <th>Floor</th>
+            <th>Area</th>
+            <th>Reckoner</th>
+            <th>PSF Rate</th>
+            <th>Status</th>
+            <th>Band</th>
+            <th>Pass</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="saleRequests" class="tab-content">
+    <div id="saleRequestsContainer">
+      <div id="messageBox" style="margin: 10px; font-weight: bold;"></div>
+
+  <table id="saleRequestTable" border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Flat No</th>
+        <th>Wing</th>
+        <th>Area</th>
+        <th>Configuration</th>
+        <th>Pass</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      const clickedBtn = Array.from(document.querySelectorAll('.tab-buttons button'))
+        .find(btn => btn.textContent.includes(tabId === 'manageFlats' ? 'Manage' : 'Sale'));
+      if (clickedBtn) clickedBtn.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
